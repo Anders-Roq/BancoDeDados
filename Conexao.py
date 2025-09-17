@@ -93,31 +93,17 @@ def consultar_um(id):
 
 
 def consultar_todos():
-    try:
-        with criar_conexao() as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM clientes")
-            resultados = cursor.fetchall()
-            return resultados
-    except sqlite3.OperationalError as e:
-        print(f"Erro de operação no banco: {e}")
-        return []
-    except sqlite3.Error as e:
-        print(f"Erro ao consultar todos os registros: {e}")
-        return []
+    with criar_conexao() as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM clientes")
+        return cursor.fetchall()
 
-
-def deletar_tabela():
-    try:
-        with criar_conexao() as conn:
-            cursor = conn.cursor()
-            cursor.execute("DROP TABLE IF EXISTS clientes")
-            conn.commit()
-    except sqlite3.Error as e:
-        print(f"Erro ao deletar a tabela: {e}")
-    else:
-        print("Tabela 'clientes' deletada com sucesso.")
-
+##inserir_registro(conexao, cur, "Diego", "DiegoFG@gmail.com")
+#atualizar_registro(conexao, cur, "Eloisa", "Elo.Isa@gmail.com", 2)
+#remover_registro(conexao,cur, 2)
+#inserir_muitos(conexao,cur, dados)
+#consultar_um(conexao, cur, 1)
+#consultar_todos(cur)
 
 
 
